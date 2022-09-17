@@ -29,7 +29,7 @@ namespace CarritoDeCompras.Models
 
         public Carrito(int idProducto, string idUsuario, int cantidad)
         {
-            //IdCarrito = idCarrito;
+            //IdCarrito = idCarrito; No va mas
             IdProducto = idProducto;
             IdUsuario = idUsuario;
             Cantidad = cantidad;
