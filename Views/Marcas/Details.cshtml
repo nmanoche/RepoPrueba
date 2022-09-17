@@ -1,0 +1,23 @@
+﻿@model CarritoDeCompras.Models.Marca
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalles de la marca</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" type="button" class="btn btn-secondary"><i class="fa-solid fa-circle-arrow-left"></i> Volver</a>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.IdMarca"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
+</div>

@@ -1,0 +1,33 @@
+﻿@model CarritoDeCompras.Models.Marca
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar Marca</h1>
+
+<br />
+<h4>Datos de la marca</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdMarca" />
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <a asp-action="Index" type="button" class="btn btn-secondary"><i class="fa-solid fa-circle-arrow-left"></i> Volver</a>
+                <input type="submit" value="Guardar cambios" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

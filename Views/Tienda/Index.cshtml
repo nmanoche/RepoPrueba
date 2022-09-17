@@ -1,0 +1,106 @@
+﻿@model IEnumerable<CarritoDeCompras.Models.Producto>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Microsoft.AspNetCore.Identity
+@using CarritoDeCompras.Areas.Identity.Data
+
+@inject SignInManager<IdentityUsuario> SignInManager
+@inject UserManager<IdentityUsuario> UserManager
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Tienda ORT</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Conseguí lo que buscás!</p>
+        </div>
+    </div>
+</header>
+<br />
+@{
+    if(ViewBag.AgregadoCarrito != null)
+    {
+        <div class="form-floating mb-3">
+            <div class="alert alert-success" role="alert">
+                @ViewBag.AgregadoCarrito
+            </div>
+        </div>
+    }
+}
+
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div id="contenedor_producto" class="row gx-4 gx-lg-5 row-cols-4 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
+            @foreach (var item in Model)
+            {
+
+                @if (item.Stock > 0)
+                {
+
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                    <img class="card-img-top" src="/Images/@Html.DisplayFor(modelItem => item.RutaImagen)" />
+                            <!-- Product details-->
+                    <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                            <h5 class="fw-bolder">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                                    <!-- Product price-->
+                            $ @Html.DisplayFor(modelItem => item.Precio)
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" asp-action="DetalleProducto" asp-route-id="@item.IdProducto">Ver detalle</a></div>
+                            </div>
+
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                <div class="text-center">
+                                    @*<button class="btn btn-outline-dark flex-shrink-0 agregarcarrito" type="button" asp-action="AgregarAlCarrito" asp-route-idProducto="@item.IdProducto" asp-route-idUser="@UserManager.GetUserId(User)">
+                                        <i class="fas fa-cart-plus"></i>
+                                        Agregar al carrito
+                                    </button>*@
+
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" asp-controller="Carrito" asp-action="AgregarAlCarrito" asp-route-idProducto="@item.IdProducto" asp-route-idUser="@UserManager.GetUserId(User)"><i class="fa-solid fa-cart-arrow-down"></i> Agregar al carrito</a></div>
+
+
+                                    @*<a class="btn btn-outline-dark mt-auto" href="@Url.Action("Carrito", "Tienda")">Agregar al Carrito</a>*@
+                                </div>
+                                <br />
+                            }
+
+                        </div>
+                    </div>
+
+                }
+
+            }
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script>
+
+        $(document).ready(funtion() {
+	        alert("Hola tienda")
+	
+        })
+
+    </script>
+}
+

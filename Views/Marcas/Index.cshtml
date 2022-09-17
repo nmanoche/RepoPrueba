@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CarritoDeCompras.Models.Marca>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Marcas</h1>
+
+@{
+    if(ViewBag.Mensaje != null)
+    {
+        <div class="form-floating mb-3">
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.Mensaje
+            </div>
+        </div>
+    }
+}
+
+<div>
+    <a asp-action="Create" class="btn btn-primary" style="float: right">Crear nueva marca</a>
+</div>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdMarca" title="Editar marca"><i class="fa-solid fa-pen-to-square"></i></a> |
+                <a asp-action="Details" asp-route-id="@item.IdMarca" title="Ver detalle"><i class="fa-solid fa-circle-plus"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.IdMarca" title="Eliminar marca"><i class="fas fa-times"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

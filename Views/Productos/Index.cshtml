@@ -1,0 +1,75 @@
+﻿@model IEnumerable<CarritoDeCompras.Models.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+
+<h1>Productos</h1>
+
+<div>
+    <a asp-action="Create" class="btn btn-primary" style="float: right">Crear nuevo producto</a>
+</div>
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th width="200">
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdMarca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RutaImagen)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td width="80">
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td width="200" height="50">
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td width="80">
+                @Html.DisplayFor(modelItem => item.Marca.Descripcion)
+            </td>
+            <td width="80">
+                @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
+            </td>
+            <td width="80">
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td width="80">
+                @Html.DisplayFor(modelItem => item.Stock)
+            </td>
+            <td width="200">
+                <img src="/Images/@Html.DisplayFor(modelItem => item.RutaImagen)" />
+            </td>
+            <td width="80">
+                <a asp-action="Edit" asp-route-id="@item.IdProducto" title="Editar producto"><i class="fa-solid fa-pen-to-square"></i></a> |
+                <a asp-action="Details" asp-route-id="@item.IdProducto" title="Ver detalle"><i class="fa-solid fa-circle-plus"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.IdProducto" title="Eliminar producto"><i class="fas fa-times"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
